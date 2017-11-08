@@ -20,7 +20,7 @@ int main(int argc,char**args){
     }
     //cout << "finish generating numbers" << endl;
     auto start = chrono::system_clock::now();
-    if strcmp(args[1],"bubble" == 0)
+    if(strcmp(args[1],"bubble") == 0)
         bubble_sort();
     auto end = chrono::system_clock::now();
     chrono::duration<double> elapsed = end-start;
