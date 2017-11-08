@@ -14,6 +14,7 @@ void qs(int first, int last);
 
 using namespace std;
 unsigned long long SIZE = 100000;
+int NUMTHREADS = 1;
 vector<int> a, b, v;
 
 int main(int argc, char **args)
