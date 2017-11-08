@@ -7,8 +7,9 @@
 #include <cstring>
 
 void bubble_sort();
-void merge();
+int merge(int l, int r, int u);
 void merge_sort();
+void qs(int first, int last);
 
 using namespace std;
 unsigned long long SIZE = 100000;
