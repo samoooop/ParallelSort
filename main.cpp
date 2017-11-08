@@ -30,8 +30,10 @@ int main(int argc, char **args)
         bubble_sort();
     if (strcmp(args[1], "merge") == 0)
         merge_sort();
-    if (strcmp(args[1], "quick") == 0)
+    if (strcmp(args[1], "quick") == 0){
+        omp_set_nested(1);
         qs(0,a.size - 1);
+    }
     
     auto end = chrono::system_clock::now();
     chrono::duration<double> elapsed = end - start;
@@ -146,20 +148,20 @@ void qs(int first, int last)
             /* For large data size, sort the two partitions in parallel */
             #pragma omp parallel num_threads(2)
             {
-                #pragma omp for nowait
-                // Use "nowait" because different threads are operating on different
-                // portions of the array, they need not be synchronized.
-                for (i = 0; i <= 1; i++)
+                #pragma omp sections nowait
                 {
-                    qs(v, start[i], end[i]);
-                }
+                    #pragma omp section
+                    qs(start[0], end[0]);
+                    #pragma omp section
+                    qs(start[1], end[1]);
+                } 
             }
         }
         else
         {
             /* For small data, sort sequentially */
-            qs(v, start[0], end[0]);
-            qs(v, start[0], end[0]);
+            qs(start[0], end[0]);
+            qs(start[0], end[0]);
         }
     }
 }
