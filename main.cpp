@@ -5,6 +5,7 @@
 #include <ctime>
 #include <chrono>
 #include <cstring>
+#include <omp.h>
 
 void bubble_sort();
 int merge(int l, int r, int u);
@@ -33,7 +34,7 @@ int main(int argc, char **args)
         merge_sort();
     if (strcmp(args[1], "quick") == 0){
         omp_set_nested(1);
-        qs(0,a.size - 1);
+        qs(0,a.size() - 1);
     }
     
     auto end = chrono::system_clock::now();
@@ -70,7 +71,7 @@ void merge_sort()
     int i, j, k;
     for (i = 1; i <= SIZE; i *= 2)
     {
-#pragma #pragma omp parallel for private(k) parallel for private(k)
+        #pragma omp parallel for private(k)
         for (j = 0; j < SIZE; j += 2 * i)
         {
             k = j + 2 * i - 1;
