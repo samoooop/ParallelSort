@@ -1,18 +1,32 @@
+
 #include<iostream>
 #include<cstdlib>
+#include<vector>
+#include<ctime>
+#include<chrono>
 
-#define SIZE 100000000
+void bubble_sort();
 
-int a[SIZE]
+using namespace std;
+unsigned long long SIZE = 100000;
+vector<int> a;
 
-int main(){
+int main(int argc,char**args){
+    SIZE = atoi(args[1]);
     std::srand(0);
     for(int i=0;i<SIZE;i++){
-        a[i] = std::rand();
+        a.push_back(rand());
     }
+    //cout << "finish generating numbers" << endl;
+    auto start = chrono::system_clock::now();
+    bubble_sort();
+    auto end = chrono::system_clock::now();
+    chrono::duration<double> elapsed = end-start;
+    cout <<  elapsed.count() << endl;
 }
 
 void bubble_sort(){
+    int i,j,tmp;
     for (i=0; i<(SIZE/2); i++) {
         #pragma omp parallel for
         for(j=0; j<(SIZE-1); j+=2)
