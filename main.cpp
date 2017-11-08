@@ -19,6 +19,7 @@ vector<int> a, b, v;
 int main(int argc, char **args)
 {
     SIZE = atoi(args[2]);
+    NUMTHREADS = atoi(args[3]);
     std::srand(0);
     for (int i = 0; i < SIZE; i++)
     {
